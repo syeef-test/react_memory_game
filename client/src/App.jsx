@@ -1,8 +1,38 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import "./App.css";
 
+const colourlist = ["Red", "Green", "Blue", "Yellow", "Orange", "Pink"];
+
 function App() {
+  const [cards, setCards] = useState([]);
+  const [score, setScore] = useState(0);
+  const [hintCounter, setHintCounter] = useState(3);
+  const [moves, setMoves] = useState(0);
+
+  const startGame = () => {
+    const duplicateCardList = colourlist.concat(colourlist); //to compare two cards
+    // console.log(duplicateCardList);
+
+    const newGameList = [];
+    while (newGameList.length < colourlist.length * 2) {
+      let randomIndex = Math.floor(Math.random() * duplicateCardList.length); //geting random index from list
+      // console.log(randomIndex);
+      newGameList.push({
+        colourCard: duplicateCardList[randomIndex],
+        flipped: false,
+        solved: false,
+        position: newGameList.length,
+      });
+    }
+    setCards(newGameList);
+  };
+
+  // console.log(cards);
+
+  useEffect(() => {
+    startGame();
+  }, []);
   return (
     <main>
       <h1>Memory Game</h1>
@@ -14,16 +44,14 @@ function App() {
       </div>
 
       <div className="container">
-        <div className="flip-card">
-          <div className="flip-card-inner">
-            <div className="flip-card-front"></div>
-            <div className="flip-card-back">
-              <h1>John Doe</h1>
-              <p>Architect & Engineer</p>
-              <p>We love that guy</p>
+        {cards.map((card, index) => (
+          <div className="flip-card" key={index}>
+            <div className="flip-card-inner">
+              <div className="flip-card-front"></div>
+              <div className="flip-card-back">{card.colourCard}</div>
             </div>
           </div>
-        </div>
+        ))}
       </div>
     </main>
   );
