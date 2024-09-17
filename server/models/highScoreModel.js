@@ -1,12 +1,16 @@
 import mongoose from "mongoose";
 
-const scoreSchema = mongoose.Schema(
+const highScoreSchema = mongoose.Schema(
   {
     user_id: {
       type: String,
       required: true,
     },
     email: {
+      type: String,
+      required: true,
+    },
+    full_name: {
       type: String,
       required: true,
     },
@@ -29,4 +33,4 @@ const scoreSchema = mongoose.Schema(
   }
 );
 
-export const Score = mongoose.model("scores", scoreSchema);
+export const HighScore = mongoose.model("highscores", highScoreSchema);

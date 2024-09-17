@@ -1,4 +1,5 @@
 import { Score } from "../models/scoreModel.js";
+import { HighScore } from "../models/highScoreModel.js";
 
 export const saveResult = async (req, res, next) => {
   try {
@@ -35,6 +36,20 @@ export const saveResult = async (req, res, next) => {
 
     if (!response) {
       return res.status(500).send({ message: "Failed to save score" });
+    }
+
+    if (response) {
+      if (req.body.score > 20 && req.body.result === "win") {
+        const highScore = {
+          score: req.body.score,
+          moves: req.body.moves,
+          full_name: req.body.fullname,
+          user_id: req.body.userId,
+          email: req.body.email,
+        };
+        const response2 = await HighScore.create(highScore);
+        console.log(response2);
+      }
     }
 
     return res.status(200).send(response);
