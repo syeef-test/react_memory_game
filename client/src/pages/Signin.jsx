@@ -59,16 +59,24 @@ function Signin() {
           height: "100vh",
         }}
       >
-        <h3>
-          Signin
+        <div>
+          <h3>Signin</h3>
           <div>
             {loading ? <Spinner animation="border" role="status" /> : ""}
             {success ? (
-              <Alert variant="success">Signin successfull!</Alert>
+              <div>
+                <Alert variant="success">Signin successfull!</Alert>
+              </div>
             ) : (
               ""
             )}
-            {error ? <Alert variant="danger">{error}</Alert> : ""}
+            {error ? (
+              <div>
+                <Alert variant="danger">{error}</Alert>{" "}
+              </div>
+            ) : (
+              ""
+            )}
           </div>
           <div>
             <Card style={{ padding: "20px", maxWidth: "500px" }}>
@@ -88,7 +96,7 @@ function Signin() {
               <Link to="/signup">Don't have account Sign up </Link>
             </Card>
           </div>
-        </h3>
+        </div>
       </div>
     </>
   );

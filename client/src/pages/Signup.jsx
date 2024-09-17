@@ -65,8 +65,8 @@ function Signup() {
           height: "100vh",
         }}
       >
-        <h3>
-          Signup
+        <div>
+          <h3>Signup</h3>
           <div>
             {loading ? <Spinner animation="border" role="status" /> : ""}
             {success && <Alert variant="success">Signup Successful</Alert>}
@@ -93,7 +93,7 @@ function Signup() {
               </form>
             </Card>
           </div>
-        </h3>
+        </div>
       </div>
     </>
   );
