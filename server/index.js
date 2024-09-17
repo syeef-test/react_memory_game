@@ -4,6 +4,8 @@ dotenv.config();
 import mongoose from "mongoose";
 import cors from "cors";
 
+import userRoute from "./routes/userRoute.js";
+
 const PORT = process.env.PORT || 3000;
 const MONGODB_URI = process.env.MONGODB_URI;
 
@@ -15,6 +17,8 @@ app.use(cors());
 app.get("/", (req, res) => {
   return res.status(200).send("Welcome to memory game");
 });
+
+app.use("/api/auth", userRoute);
 
 async function startServer() {
   try {
