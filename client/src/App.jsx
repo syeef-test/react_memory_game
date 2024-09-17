@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import "./App.css";
 
@@ -9,6 +9,8 @@ function App() {
   const [score, setScore] = useState(0);
   const [hintCounter, setHintCounter] = useState(3);
   const [moves, setMoves] = useState(0);
+
+  let timeout = useRef();
 
   const startGame = () => {
     const duplicateCardList = colourlist.concat(colourlist); //to compare two cards
@@ -54,7 +56,37 @@ function App() {
     setMoves((prevMoves) => prevMoves + 1);
   };
 
-  console.log(moves);
+  // console.log("moves:", moves);
+
+  const gameLogic = () => {
+    const flippedCards = cards.filter((data) => data.flipped && !data.solved);
+    if (flippedCards.length === 2) {
+      timeout.current = setTimeout(() => {
+        setCards(
+          cards.map((card) => {
+            if (
+              card.position === flippedCards[0].position ||
+              card.position === flippedCards[1].position
+            ) {
+              //comapre two selected card
+              if (flippedCards[0].colourCard === flippedCards[1].colourCard) {
+                card.solved = true;
+                setScore(score + 10); //add score if it is correct
+              } else {
+                card.flipped = false;
+              }
+            }
+            return card;
+          })
+        );
+      }, 800);
+    }
+  };
+
+  useEffect(() => {
+    gameLogic();
+    return () => clearTimeout(timeout.current);
+  }, [cards]);
 
   return (
     <main>
