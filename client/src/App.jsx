@@ -74,6 +74,9 @@ function App() {
                 setScore(score + 10); //add score if it is correct
               } else {
                 card.flipped = false;
+                if (score > 0) {
+                  setScore(score - 5);
+                }
               }
             }
             return card;
@@ -93,7 +96,7 @@ function App() {
       <h1>Memory Game</h1>
 
       <div className="scorecontent">
-        <h2>Score:0</h2>
+        <h2>Score:{score}</h2>
 
         <button className="hint-button">Hint</button>
       </div>
