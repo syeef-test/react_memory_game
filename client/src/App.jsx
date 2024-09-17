@@ -24,6 +24,9 @@ function App() {
         solved: false,
         position: newGameList.length,
       });
+
+      //to make sure no card is repeated twice when clicked on card
+      duplicateCardList.splice(randomIndex, 1);
     }
     setCards(newGameList);
   };
@@ -33,25 +36,50 @@ function App() {
   useEffect(() => {
     startGame();
   }, []);
+
+  const handleActiveCard = (card) => {
+    // const flippedCards = cards.filter((data) => data.flipped && !data.solved);
+    // console.log(flippedCards);
+    // console.log("card", card);
+
+    // if (flippedCards.length === 2) return;
+
+    const newCards = cards.map((carddata) => {
+      if (carddata.position === card.position) {
+        carddata.flipped = !carddata.flipped;
+      }
+      return carddata;
+    });
+    setCards(newCards);
+    setMoves((prevMoves) => prevMoves + 1);
+  };
+
+  console.log(moves);
+
   return (
     <main>
       <h1>Memory Game</h1>
 
-      <div>
+      <div className="scorecontent">
         <h2>Score:0</h2>
 
-        <button>Hint</button>
+        <button className="hint-button">Hint</button>
       </div>
 
       <div className="container">
         {cards.map((card, index) => (
-          <div className="flip-card" key={index}>
+          <div
+            className={`flip-card ${card.flipped ? "active" : ""}`}
+            key={index}
+            onClick={() => handleActiveCard(card)}
+          >
             <div className="flip-card-inner">
               <div className="flip-card-front"></div>
               <div className="flip-card-back">{card.colourCard}</div>
             </div>
           </div>
         ))}
+        <div className="hint-counter">Hints Remaining:0</div>
       </div>
     </main>
   );

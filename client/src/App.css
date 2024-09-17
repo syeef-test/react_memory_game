@@ -34,7 +34,7 @@
  }
 
  /* Do an horizontal flip when you move the mouse over the flip box container */
- .flip-card:hover .flip-card-inner {
+ .flip-card.active .flip-card-inner {
    transform: rotateY(180deg);
  }
 
@@ -51,13 +51,37 @@
 
  /* Style the front side (fallback if image is missing) */
  .flip-card-front {
-   background-color: #bbb;
+   background-color: #254764ba;
    color: black;
+   border-radius: 5px;
  }
 
  /* Style the back side */
  .flip-card-back {
-   background-color: dodgerblue;
+   background-color: #03243a;
    color: white;
    transform: rotateY(180deg);
+    border-radius: 5px;
+    font-size: 32px;
+    display: grid;
+    place-items: center;
+    font-family: cursive;
  }
+
+ .scorecontent{
+  display: flex;
+  justify-content: space-between;
+ }
+
+ .hint-button{
+  width: 66px;
+  height: 42px;
+  color: white;
+  background-color: #2470be;
+  margin-top: 19px;
+ }
+
+ .hint-counter{
+  font-weight: 600;
+ }
+
