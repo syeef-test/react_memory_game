@@ -10,6 +10,14 @@ const scoreSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    full_name: {
+      type: String,
+      required: true,
+    },
+    result: {
+      type: String,
+      required: true,
+    },
     status: {
       type: Boolean,
       required: true,

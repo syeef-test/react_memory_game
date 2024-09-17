@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useMemo } from "react";
 
 import "./GameComponent.css";
 import Confetti from "react-confetti";
+import useAxios from "../hooks/useAxios/index.js";
 
 const colourlist = ["Red", "Green", "Blue", "Yellow", "Orange", "Pink"];
 
@@ -10,6 +11,9 @@ function GameComponent() {
   const [score, setScore] = useState(0);
   const [hintCounter, setHintCounter] = useState(3);
   const [moves, setMoves] = useState(0);
+
+  const [success, setSuccess] = useState(false);
+  const { response, error, loading, fetchData } = useAxios();
 
   let timeout = useRef();
 
@@ -125,6 +129,38 @@ function GameComponent() {
     }
     return false;
   }, [cards]);
+
+  const saveGameResult = () => {
+    const userId = localStorage.getItem("userId");
+    const fullname = localStorage.getItem("fullname");
+    const email = localStorage.getItem("email");
+    const data = {
+      score,
+      moves,
+      result: score > 45 ? "win" : "lose",
+      userId: userId,
+      fullname: fullname,
+      email: email,
+    };
+
+    fetchData({
+      url: "game/save",
+      method: "POST",
+      data: data,
+    });
+  };
+
+  useEffect(() => {
+    if (isGameCompleted) {
+      saveGameResult();
+    }
+  }, [isGameCompleted]);
+
+  // useEffect(() => {
+  //   if (response) {
+  //     console.log(response);
+  //   }
+  // }, [response]);
 
   const resetGame = () => {
     setScore(0);

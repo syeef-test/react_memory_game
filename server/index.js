@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 
 import userRoute from "./routes/userRoute.js";
+import gameRoute from "./routes/gameRoute.js";
 
 const PORT = process.env.PORT || 3000;
 const MONGODB_URI = process.env.MONGODB_URI;
@@ -19,6 +20,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/auth", userRoute);
+app.use("/api/game", gameRoute);
 
 async function startServer() {
   try {
