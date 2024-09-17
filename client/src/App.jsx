@@ -126,6 +126,13 @@ function App() {
     return false;
   }, [cards]);
 
+  const resetGame = () => {
+    setScore(0);
+    setMoves(0);
+    setHintCounter(3);
+    startGame();
+  };
+
   return (
     <main>
       <h1>Memory Game</h1>
@@ -188,6 +195,9 @@ function App() {
               </h1>
             </>
           )}
+          <button className="playagain-button" onClick={resetGame}>
+            Play Again
+          </button>
         </div>
       )}
     </main>

@@ -81,6 +81,14 @@
   margin-top: 19px;
  }
 
+ .playagain-button{
+  width: 66px;
+    height: 42px;
+    color: white;
+    background-color: #24be2c;
+    margin-top: 19px;
+ }
+
  .hint-counter{
   font-weight: 600;
  }
