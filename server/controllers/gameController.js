@@ -13,15 +13,6 @@ export const saveResult = async (req, res, next) => {
     ) {
       res.status(400).send({ message: "Send all required fields" });
     }
-    //console.log(req.body);
-    //       {
-    //   score: 55,
-    //   moves: 68,
-    //   result: 'win',
-    //   userId: '66e990dcfb66ec8d2c8a2838',
-    //   fullname: 'Kazi',
-    //   email: 'kazisyeef@gmail.com'
-    // }
 
     const newScore = {
       score: req.body.score,
@@ -53,6 +44,28 @@ export const saveResult = async (req, res, next) => {
     }
 
     return res.status(200).send(response);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send({ message: error.message });
+  }
+};
+
+export const getScore = async (req, res, next) => {
+  try {
+    //console.log(req.user._id);
+    const response = await Score.find({
+      user_id: req.user._id,
+      status: true,
+    });
+
+    if (!response.length) {
+      return res
+        .status(404)
+        .send({ message: "No score data found in database" });
+    }
+    return res
+      .status(200)
+      .send({ message: "Score data found in database", data: response });
   } catch (error) {
     console.error(error.message);
     res.status(500).send({ message: error.message });
