@@ -1,6 +1,7 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 
 import "./App.css";
+import Confetti from "react-confetti";
 
 const colourlist = ["Red", "Green", "Blue", "Yellow", "Orange", "Pink"];
 
@@ -40,11 +41,11 @@ function App() {
   }, []);
 
   const handleActiveCard = (card) => {
-    // const flippedCards = cards.filter((data) => data.flipped && !data.solved);
+    const flippedCards = cards.filter((data) => data.flipped && !data.solved);
     // console.log(flippedCards);
     // console.log("card", card);
 
-    // if (flippedCards.length === 2) return;
+    if (flippedCards.length === 2) return;
 
     const newCards = cards.map((carddata) => {
       if (carddata.position === card.position) {
@@ -83,12 +84,46 @@ function App() {
           })
         );
       }, 800);
+    } else if (flippedCards.length === 1 && hintCounter < 3) {
+      timeout.current = setTimeout(() => {
+        setCards(
+          cards.map((card) => {
+            if (card.position === flippedCards[0].position) {
+              card.flipped = false;
+            }
+            return card;
+          })
+        );
+      }, 800);
     }
   };
 
   useEffect(() => {
     gameLogic();
     return () => clearTimeout(timeout.current);
+  }, [cards]);
+
+  const handleHint = (data) => {
+    if (hintCounter > 0) {
+      const unFlippedCards = data.filter(
+        (data) => !data.flipped && !data.solved
+      );
+      if (unFlippedCards.length > 0) {
+        const randomIndex = Math.floor(Math.random() * unFlippedCards.length);
+        const cardToReveal = unFlippedCards[randomIndex];
+        const newPieces = [...cards];
+        newPieces[cardToReveal.position].flipped = true;
+        setCards(newPieces);
+        setHintCounter(hintCounter - 1);
+      }
+    }
+  };
+
+  const isGameCompleted = useMemo(() => {
+    if (cards.length > 0 && cards.every((card) => card.solved)) {
+      return true;
+    }
+    return false;
   }, [cards]);
 
   return (
@@ -98,7 +133,13 @@ function App() {
       <div className="scorecontent">
         <h2>Score:{score}</h2>
 
-        <button className="hint-button">Hint</button>
+        <button
+          className="hint-button"
+          onClick={() => handleHint(cards)}
+          disabled={hintCounter === 0}
+        >
+          Hint
+        </button>
       </div>
 
       <div className="container">
@@ -110,12 +151,45 @@ function App() {
           >
             <div className="flip-card-inner">
               <div className="flip-card-front"></div>
-              <div className="flip-card-back">{card.colourCard}</div>
+              <div
+                className="flip-card-back"
+                style={{
+                  backgroundColor: card.colourCard ? card.colourCard : "",
+                }}
+              >
+                {card.colourCard}
+              </div>
             </div>
           </div>
         ))}
-        <div className="hint-counter">Hints Remaining:0</div>
+        <div className="hint-counter">Hints Remaining:{hintCounter}</div>
       </div>
+      {isGameCompleted && (
+        <div className="gamecompleted">
+          {score > 45 ? (
+            <>
+              <h1>
+                YOU WIN!!!
+                <br />
+                Your Score is {score}
+                <br />
+                No. of moves {moves}
+              </h1>
+              <Confetti width={window.innerWidth} height={window.innerHeight} />
+            </>
+          ) : (
+            <>
+              <h1>
+                OOPS... YOU LOSE!!!
+                <br />
+                Your Score is {score}
+                <br />
+                No. of moves {moves}
+              </h1>
+            </>
+          )}
+        </div>
+      )}
     </main>
   );
 }

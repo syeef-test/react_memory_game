@@ -85,3 +85,16 @@
   font-weight: 600;
  }
 
+ .gamecompleted{
+  background-color: rgba(0,0,0,0.76);
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+ }
+
+ .gamecompleted h1{
+font-size: 50px;
+color: white;
+ }
+
