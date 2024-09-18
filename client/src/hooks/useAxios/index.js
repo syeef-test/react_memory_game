@@ -14,26 +14,6 @@ const useAxios = () => {
     baseURL: "https://react-memory-game-server.vercel.app/api/",
   });
 
-  // axiosInstance.interceptors.request.use(
-  //   (config) => {
-  //     //console.log("Sending request to:", config.url);
-  //     return config;
-  //   },
-  //   (error) => {
-  //     return Promise.reject(error);
-  //   }
-  // );
-
-  // axiosInstance.interceptors.response.use(
-  //   (response) => {
-  //     //console.log("Received response from:", response.config.url);
-  //     return response;
-  //   },
-  //   (error) => {
-  //     return Promise.reject(error);
-  //   }
-  // );
-
   useEffect(() => {
     const source = axios.CancelToken.source();
 

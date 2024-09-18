@@ -30,7 +30,7 @@ function Leadboard() {
   return (
     <>
       <div>
-        <h1>Leadboard</h1>
+        <h1>Leadboard(Score more then 45)</h1>
       </div>
       <div>
         <Table striped bordered hover>
@@ -44,7 +44,7 @@ function Leadboard() {
             </tr>
           </thead>
           <tbody>
-            {score.length > 0 &&
+            {score.length > 0 ? (
               score.map((data, index) => (
                 <tr key={index}>
                   <td>{index + 1}</td>
@@ -53,7 +53,12 @@ function Leadboard() {
                   <td>{data.moves}</td>
                   <td>{new Date(data.createdAt).toLocaleString()}</td>
                 </tr>
-              ))}
+              ))
+            ) : (
+              <tr>
+                <td>No data found</td>
+              </tr>
+            )}
           </tbody>
         </Table>
       </div>

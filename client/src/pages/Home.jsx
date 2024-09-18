@@ -44,7 +44,7 @@ function Home() {
             </tr>
           </thead>
           <tbody>
-            {score.length > 0 &&
+            {score.length > 0 ? (
               score.map((data, index) => (
                 <tr key={index}>
                   <td>{index + 1}</td>
@@ -54,7 +54,12 @@ function Home() {
                   <td>{new Date(data.createdAt).toLocaleString()}</td>
                   <td>{data.result}</td>
                 </tr>
-              ))}
+              ))
+            ) : (
+              <tr>
+                <td>No data found</td>
+              </tr>
+            )}
           </tbody>
         </Table>
       </div>
