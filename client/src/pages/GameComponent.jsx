@@ -12,7 +12,6 @@ function GameComponent() {
   const [score, setScore] = useState(0);
   const [hintCounter, setHintCounter] = useState(3);
   const [moves, setMoves] = useState(0);
-  const [highScore, setHighScore] = useState();
 
   //const [success, setSuccess] = useState(false);
   const { response, error, loading, fetchData } = useAxios();
@@ -173,28 +172,6 @@ function GameComponent() {
     setHintCounter(3);
     startGame();
   };
-
-  //get single highscore
-  const getSingleHighScore = async () => {
-    try {
-      const token = localStorage.getItem("token");
-
-      fetchData({
-        url: "game/single_high_score",
-        method: "GET",
-        headers: { authorization: token },
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  useEffect(() => {
-    getSingleHighScore();
-    if (response) {
-      console.log("single score", response);
-      //setHighScore(response.data);
-    }
-  }, [response]);
 
   return (
     <main>
