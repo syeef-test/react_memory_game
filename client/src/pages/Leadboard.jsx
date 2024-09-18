@@ -2,34 +2,35 @@ import React, { useEffect, useState } from "react";
 import useAxios from "../hooks/useAxios/index.js";
 import Table from "react-bootstrap/Table";
 
-function Home() {
+function Leadboard() {
   const { response, error, loading, fetchData } = useAxios();
   const [score, setScore] = useState([]);
 
-  const getScore = async () => {
+  const getHighScore = async () => {
     const token = localStorage.getItem("token");
 
     await fetchData({
-      url: "game/score",
+      url: "game/high_score",
       method: "GET",
       headers: { authorization: token },
     });
   };
 
   useEffect(() => {
-    getScore();
+    getHighScore();
   }, []);
 
   useEffect(() => {
     if (response) {
-      console.log("scores", response);
+      console.log("high_scores", response);
       setScore(response.data);
     }
   }, [response]);
+
   return (
     <>
       <div>
-        <h1>Home</h1>
+        <h1>Leadboard</h1>
       </div>
       <div>
         <Table striped bordered hover>
@@ -40,7 +41,6 @@ function Home() {
               <th>Score</th>
               <th>Moves</th>
               <th>Time</th>
-              <th>Result</th>
             </tr>
           </thead>
           <tbody>
@@ -52,7 +52,6 @@ function Home() {
                   <td>{data.score}</td>
                   <td>{data.moves}</td>
                   <td>{new Date(data.createdAt).toLocaleString()}</td>
-                  <td>{data.result}</td>
                 </tr>
               ))}
           </tbody>
@@ -62,4 +61,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Leadboard;

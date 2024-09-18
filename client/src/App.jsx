@@ -9,6 +9,7 @@ import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
 import Home from "./pages/Home";
 import Game from "./pages/GameComponent";
+import Leadboard from "./pages/Leadboard";
 
 function App() {
   const isAuth = useSelector((state) => state.auth.isAuthenticated);
@@ -26,6 +27,7 @@ function App() {
           </Route>
           <Route path="/home">{isAuth && <Home />}</Route>
           <Route path="/game">{isAuth && <Game />}</Route>
+          <Route path="/leadboard">{isAuth && <Leadboard />}</Route>
         </Switch>
       </BrowserRouter>
     </>

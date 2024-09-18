@@ -71,3 +71,21 @@ export const getScore = async (req, res, next) => {
     res.status(500).send({ message: error.message });
   }
 };
+
+export const getHighScore = async (req, res, next) => {
+  try {
+    const response = await HighScore.find().sort({ createdAt: -1 }).limit(10);
+
+    if (!response.length) {
+      return res
+        .status(404)
+        .send({ message: "No high score data found in database" });
+    }
+    return res
+      .status(200)
+      .send({ message: "High score data found in database", data: response });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send({ message: error.message });
+  }
+};

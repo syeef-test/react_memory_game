@@ -16,22 +16,45 @@ function Navigation() {
   };
 
   return (
-    <Navbar expand="lg" bg="primary" data-bs-theme="dark">
+    <Navbar fixed="top" expand="lg" bg="primary" data-bs-theme="dark">
       <Container>
         <Navbar.Brand href="#home">React Memory Game</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            {!isAuth && <NavLink to="/signup">Signup</NavLink>}
+            {!isAuth && (
+              <NavLink className="nav-link" to="/signup">
+                Signup
+              </NavLink>
+            )}
           </Nav>
           <Nav className="me-auto">
-            {!isAuth && <NavLink to="/signin">Signin</NavLink>}
+            {!isAuth && (
+              <NavLink className="nav-link" to="/signin">
+                Signin
+              </NavLink>
+            )}
           </Nav>
           <Nav className="me-auto">
-            {isAuth && <NavLink to="/home">Home</NavLink>}
+            {isAuth && (
+              <NavLink className="nav-link" to="/home">
+                Home
+              </NavLink>
+            )}
           </Nav>
           <Nav className="me-auto">
-            {isAuth && <NavLink to="/game">Start Game</NavLink>}
+            {isAuth && (
+              <NavLink className="nav-link" to="/game">
+                Start Game
+              </NavLink>
+            )}
+          </Nav>
+          <Nav className="me-auto">
+            {isAuth && (
+              <NavLink className="nav-link" to="/leadboard">
+                Leadboard
+              </NavLink>
+            )}
           </Nav>
 
           {isAuth && (

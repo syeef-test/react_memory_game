@@ -143,10 +143,13 @@ function GameComponent() {
       email: email,
     };
 
+    const token = localStorage.getItem("token");
+
     fetchData({
       url: "game/save",
       method: "POST",
       data: data,
+      headers: { authorization: token },
     });
   };
 
