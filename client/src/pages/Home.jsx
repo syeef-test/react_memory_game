@@ -30,7 +30,7 @@ function Home() {
     <>
       <div>
         <h1>Home</h1>
-        <h3>Score greater than 45 is win</h3>
+        <h4>Score greater than 45 is win</h4>
       </div>
       <div>
         <Table striped bordered hover>
