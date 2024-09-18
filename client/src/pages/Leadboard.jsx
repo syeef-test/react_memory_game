@@ -56,7 +56,9 @@ function Leadboard() {
               ))
             ) : (
               <tr>
-                <td>No data found</td>
+                <td colSpan="5" style={{ textAlign: "center" }}>
+                  No data found
+                </td>
               </tr>
             )}
           </tbody>
