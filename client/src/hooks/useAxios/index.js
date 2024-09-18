@@ -11,7 +11,7 @@ const useAxios = () => {
   // });
 
   const axiosInstance = axios.create({
-    baseURL: "https://react-memory-game-server.vercel.app:3000/api/",
+    baseURL: "https://react-memory-game-server.vercel.app/api/",
   });
 
   // axiosInstance.interceptors.request.use(
