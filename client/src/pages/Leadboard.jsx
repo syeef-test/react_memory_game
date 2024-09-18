@@ -30,7 +30,8 @@ function Leadboard() {
   return (
     <>
       <div>
-        <h1>Leadboard(Score more then 45)</h1>
+        <h1>Leadboard</h1>
+        <h3>Score more then 45</h3>
       </div>
       <div>
         <Table striped bordered hover>
