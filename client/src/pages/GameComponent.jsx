@@ -12,8 +12,9 @@ function GameComponent() {
   const [score, setScore] = useState(0);
   const [hintCounter, setHintCounter] = useState(3);
   const [moves, setMoves] = useState(0);
+  const [highScore, setHighScore] = useState();
 
-  const [success, setSuccess] = useState(false);
+  //const [success, setSuccess] = useState(false);
   const { response, error, loading, fetchData } = useAxios();
 
   let timeout = useRef();
@@ -173,10 +174,31 @@ function GameComponent() {
     startGame();
   };
 
+  //get single highscore
+  const getSingleHighScore = async () => {
+    try {
+      const token = localStorage.getItem("token");
+
+      fetchData({
+        url: "game/single_high_score",
+        method: "GET",
+        headers: { authorization: token },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    if (response) {
+      console.log("single score", response);
+      setHighScore(response.data);
+    }
+  }, [response]);
+
   return (
     <main>
       <h1>Memory Game</h1>
-
+      <h4>{highScore}</h4>
       <div className="scorecontent">
         <h2>Score:{score}</h2>
 
