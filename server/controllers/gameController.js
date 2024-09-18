@@ -30,7 +30,7 @@ export const saveResult = async (req, res, next) => {
     }
 
     if (response) {
-      if (req.body.score > 45 && req.body.result === "win") {
+      if (req.body.score > 55 && req.body.result === "win") {
         const highScore = {
           score: req.body.score,
           moves: req.body.moves,
