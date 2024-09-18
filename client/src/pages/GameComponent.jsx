@@ -176,7 +176,7 @@ function GameComponent() {
   return (
     <main>
       <h1>Memory Game</h1>
-      <h4>{highScore}</h4>
+
       <div className="scorecontent">
         <h2>Score:{score}</h2>
 

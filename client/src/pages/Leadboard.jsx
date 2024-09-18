@@ -31,7 +31,7 @@ function Leadboard() {
     <>
       <div>
         <h1>Leadboard</h1>
-        <h3>Score greater than 55</h3>
+        <h3>Score greater than 55 is high score</h3>
       </div>
       <div>
         <Table striped bordered hover>
