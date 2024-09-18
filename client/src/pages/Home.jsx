@@ -57,7 +57,7 @@ function Home() {
               ))
             ) : (
               <tr>
-                <td colSpan="5" style={{ textAlign: "center" }}>
+                <td colSpan="6" style={{ textAlign: "center" }}>
                   No data found
                 </td>
               </tr>
