@@ -22,7 +22,7 @@ function Signin() {
       const email = emailRef.current.value;
       const password = passwordRef.current.value;
 
-      if (password.length > 0 || email.length > 0) {
+      if (password.length > 0 && email.length > 0) {
         const obj = {
           email: email,
           password: password,
@@ -70,22 +70,22 @@ function Signin() {
             ) : (
               ""
             )}
-            {error ? (
-              <div>
-                <Alert variant="danger">{error}</Alert>{" "}
-              </div>
-            ) : (
-              ""
-            )}
+            {error ? <Alert variant="danger">{error.message}</Alert> : ""}
           </div>
           <div>
             <Card style={{ padding: "20px", maxWidth: "500px" }}>
               <form onSubmit={handleSubmit}>
-                <input type="email" placeholder="Email" ref={emailRef} />
+                <input
+                  type="email"
+                  placeholder="Email"
+                  ref={emailRef}
+                  required
+                />
                 <input
                   type="password"
                   placeholder="Password"
                   ref={passwordRef}
+                  required
                 />
                 <div>
                   <Button type="submit" variant="primary">

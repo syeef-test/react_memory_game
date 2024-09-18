@@ -3,6 +3,7 @@ import { useState, useEffect, useRef, useMemo } from "react";
 import "./GameComponent.css";
 import Confetti from "react-confetti";
 import useAxios from "../hooks/useAxios/index.js";
+import Button from "react-bootstrap/Button";
 
 const colourlist = ["Red", "Green", "Blue", "Yellow", "Orange", "Pink"];
 
@@ -179,13 +180,14 @@ function GameComponent() {
       <div className="scorecontent">
         <h2>Score:{score}</h2>
 
-        <button
+        <Button
+          variant="info"
           className="hint-button"
           onClick={() => handleHint(cards)}
           disabled={hintCounter === 0}
         >
           Hint
-        </button>
+        </Button>
       </div>
 
       <div className="container">
@@ -234,9 +236,13 @@ function GameComponent() {
               </h1>
             </>
           )}
-          <button className="playagain-button" onClick={resetGame}>
+          <Button
+            variant="success"
+            className="playagain-button"
+            onClick={resetGame}
+          >
             Play Again
-          </button>
+          </Button>
         </div>
       )}
     </main>

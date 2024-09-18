@@ -73,21 +73,21 @@
     justify-content: space-between;
 }
 
-.hint-button {
+/* .hint-button {
     width: 66px;
     height: 42px;
     color: white;
     background-color: #2470be;
     margin-top: 19px;
-}
+} */
 
-.playagain-button {
+/* .playagain-button {
     width: 66px;
     height: 42px;
     color: white;
     background-color: #24be2c;
     margin-top: 19px;
-}
+} */
 
 .hint-counter {
     font-weight: 600;

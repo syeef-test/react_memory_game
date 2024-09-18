@@ -33,12 +33,8 @@ function Signup() {
           method: "POST",
           data: obj,
         });
-
-        // if (response) {
-        //   emailRef.current.value = "";
-        //   passwordRef.current.value = "";
-        //   confirmPasswordRef.current.value = "";
-        // }
+      } else {
+        alert("Password and confirm password did not match");
       }
     } catch (error) {
       console.log(error);
@@ -70,22 +66,34 @@ function Signup() {
           <div>
             {loading ? <Spinner animation="border" role="status" /> : ""}
             {success && <Alert variant="success">Signup Successful</Alert>}
-            {error ? <Alert variant="danger">{error}</Alert> : ""}
+            {error ? <Alert variant="danger">{error.message}</Alert> : ""}
           </div>
           <div>
             <Card style={{ padding: "20px", maxWidth: "500px" }}>
               <form onSubmit={handleSubmit}>
-                <input type="email" placeholder="Email" ref={emailRef} />
-                <input type="text" placeholder="Full Name" ref={fullnameRef} />
+                <input
+                  type="email"
+                  placeholder="Email"
+                  ref={emailRef}
+                  required
+                />
+                <input
+                  type="text"
+                  placeholder="Full Name"
+                  ref={fullnameRef}
+                  required
+                />
                 <input
                   type="password"
                   placeholder="Password"
                   ref={passwordRef}
+                  required
                 />
                 <input
                   type="password"
                   placeholder="Confirm Password"
                   ref={confirmPasswordRef}
+                  required
                 />
                 <Button type="submit" variant="primary">
                   Submit
