@@ -6,8 +6,12 @@ const useAxios = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
+  // const axiosInstance = axios.create({
+  //   baseURL: "http://127.0.0.1:3000/api/",
+  // });
+
   const axiosInstance = axios.create({
-    baseURL: "http://127.0.0.1:3000/api/",
+    baseURL: "https://react-memory-game-server.vercel.app:3000/api/",
   });
 
   // axiosInstance.interceptors.request.use(
