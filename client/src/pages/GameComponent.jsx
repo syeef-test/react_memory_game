@@ -191,7 +191,7 @@ function GameComponent() {
   useEffect(() => {
     if (response) {
       console.log("single score", response);
-      setHighScore(response.data);
+      //setHighScore(response.data);
     }
   }, [response]);
 

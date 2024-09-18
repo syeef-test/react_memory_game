@@ -22,7 +22,7 @@ function Home() {
 
   useEffect(() => {
     if (response) {
-      console.log("scores", response);
+      //console.log("scores", response);
       setScore(response.data);
     }
   }, [response]);
